@@ -1,1 +1,1 @@
-# jpq-graphql
+# jpq-graphql-training
