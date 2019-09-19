@@ -20,3 +20,15 @@ exports.getAlbum = async params => {
     throw badRequest(error.message);
   }
 };
+
+exports.getAlbums = async params => {
+  const { offset = 1, limit = 10, orderBy = 'id' } = params;
+
+  const albums = await requestPromise(`${endpointJsonPlaceholder}/albums`, { json: true });
+
+  const albumsPaginated = albums.slice((offset - 1) * limit, offset * limit);
+
+  albumsPaginated.sort((a, b) => (a[orderBy] > b[orderBy] ? 1 : -1));
+
+  return albumsPaginated;
+};
