@@ -1,3 +1,5 @@
+const logger = require('../logger');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'user',
@@ -26,7 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.createModel = user => User.create(user);
+  User.createModel = user =>
+    User.create(user)
+      .then(result => {
+        logger.info(`The user ${user.firstName} ${user.lastName} was successfully created`);
+        return result.dataValues;
+      })
+      .catch(error => logger.error(error.message));
 
   User.getOne = user => User.findOne({ where: user });
 
