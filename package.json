@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.4.8",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.4",
     "express-wolox-logger": "^1.0.0",
     "graphql": "^14.2.1",
@@ -65,6 +66,8 @@
     "jwt-simple": "^0.5.1",
     "lodash.merge": "^4.6.2",
     "pg": "^7.4.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "rollbar": "^2.3.9",
     "sequelize": "^6.0.0",
     "umzug": "^2.1.0"
