@@ -22,11 +22,15 @@ exports.getAlbum = async params => {
 };
 
 exports.getAlbums = async params => {
-  const { offset = 1, limit = 10, orderBy = 'id' } = params;
+  const { filter, offset = 1, limit = 10, orderBy = 'id' } = params;
 
   const albums = await requestPromise(`${endpointJsonPlaceholder}/albums`, { json: true });
 
-  const albumsPaginated = albums.slice((offset - 1) * limit, offset * limit);
+  let albumsPaginated = albums.slice((offset - 1) * limit, offset * limit);
+
+  if (filter !== undefined) {
+    albumsPaginated = albumsPaginated.filter(album => album.title === filter);
+  }
 
   albumsPaginated.sort((a, b) => (a[orderBy] > b[orderBy] ? 1 : -1));
 
