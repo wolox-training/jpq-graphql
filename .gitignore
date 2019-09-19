@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> kick-off
 # Frontend Dist Files
 app/dist
 
@@ -47,4 +50,8 @@ node_modules
 .env
 
 # VS Code
+<<<<<<< HEAD
 .vscode/
+=======
+.vscode/
+>>>>>>> kick-off
