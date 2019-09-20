@@ -1,11 +1,28 @@
 const logger = require('../../logger');
+const { user: User } = require('../../models');
 const { encryptPassword } = require('../../helpers/bcrypt');
+const { signUpValidations } = require('../../helpers/signUpValidation');
+const { badRequest } = require('../../errors');
 
-const createUser = (resolve, root, args) => {
+const createUser = async (resolve, root, args) => {
   logger.info("Middleware for 'createUser' mutation");
-  // Add different actions that you want to be executed before your resolver, i.e: input validation or caching
 
-  const { password } = args.user;
+  const { user } = args;
+
+  try {
+    await signUpValidations.validate(user);
+  } catch (error) {
+    logger.error(error.errors);
+    throw badRequest(error.errors);
+  }
+
+  const { email, password } = user;
+
+  const userFound = await User.getOne({ email });
+
+  if (userFound !== null) {
+    throw badRequest("User's email already exists");
+  }
 
   const hasshedPassword = encryptPassword(password);
 
