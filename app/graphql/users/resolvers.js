@@ -21,7 +21,7 @@ module.exports = {
     users: getUsers
   },
   Mutation: {
-    createUser,
+    user: createUser,
     login: logIn
   },
   Subscription: {
