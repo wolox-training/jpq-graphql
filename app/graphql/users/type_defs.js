@@ -16,8 +16,9 @@ const rootTypes = gql`
 
 const customTypes = gql`
   type User {
-    firstName: String!
-    lastName: String!
+    firstName: String @deprecated
+    lastName: String @deprecated
+    name: String
     email: String!
     password: String!
     id: ID!
