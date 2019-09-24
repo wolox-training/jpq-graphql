@@ -3,7 +3,7 @@ const { query } = require('../server.spec'),
 
 describe('albums', () => {
   describe('queries', () => {
-    it.only('should return undefinded when fetching a non existing album', () =>
+    it('should return undefinded when fetching a non existing album', () =>
       query(getAlbum(1)).then(res => {
         expect(res.data).toBeUndefined();
       }));
