@@ -4,7 +4,7 @@ const { getArtistByAlbum } = require('../../services/artists');
 
 const getAlbum = (_, params) => album.getAlbum(params);
 const getPhotos = ({ id }) => getPhotosOfAlbum(id);
-const getArtist = ({ id }) => getArtistByAlbum(id);
+const getArtist = ({ userId }) => getArtistByAlbum(userId);
 
 module.exports = {
   Query: {
