@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const rootTypes = gql`
   extend type Query {
     album(id: ID!): Album
-    albums(filter: String, offset: Int, limit: Int, orderBy: String): [Album]
+    albums(filter: String, offset: Int = 1, limit: Int = 10, orderBy: String = "id"): [Album]
   }
 `;
 
