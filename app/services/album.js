@@ -40,3 +40,8 @@ exports.getAlbums = async params => {
     throw badRequest(error.message);
   }
 };
+
+exports.buyAlbum = params => {
+  const { id } = params;
+  return { title: `Album with id: ${id}` };
+};

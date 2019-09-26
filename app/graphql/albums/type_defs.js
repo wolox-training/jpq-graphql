@@ -5,6 +5,9 @@ const rootTypes = gql`
     album(id: ID!): Album
     albums(filter: String, offset: Int, limit: Int, orderBy: String): [Album]
   }
+  extend type Mutation {
+    buyAlbum(id: ID!): buyAlbum
+  }
 `;
 
 const customTypes = gql`
@@ -13,6 +16,10 @@ const customTypes = gql`
     title: String!
     artist: String
     photos: [Photo]
+  }
+
+  type buyAlbum {
+    title: String!
   }
 `;
 
