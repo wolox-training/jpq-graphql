@@ -38,7 +38,7 @@ const inputTypes = gql`
     password: String!
   }
   input LoginInput {
-    username: String!
+    email: String!
     password: String!
   }
 `;

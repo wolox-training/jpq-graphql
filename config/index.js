@@ -44,7 +44,9 @@ const config = {
     },
     session: {
       header_name: 'authorization',
-      secret: process.env.NODE_API_SESSION_SECRET
+      secret: process.env.NODE_API_SESSION_SECRET,
+      expired_quantity: process.env.SESSION_EXPIRED_QUANTITY,
+      expired_measure: process.env.SESSION_EXPIRED_MEASURE
     },
     externalApi: {
       endpointJsonPlaceholder: process.env.ENDPOINT_JSON_PLACEHOLDER

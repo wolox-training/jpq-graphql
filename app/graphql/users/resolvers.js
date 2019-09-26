@@ -1,18 +1,16 @@
 const { user: User } = require('../../models'),
   { userLoggedIn } = require('../events');
+const { createToken } = require('../../helpers/jwt');
 
 const getUser = (_, params) => User.getOne(params);
 const getUsers = (_, params) => User.getAll(params);
 
 const createUser = (_, { user }) => User.createModel(user);
-const logIn = (_, { credentials }) => {
+const logIn = (_, { user }) => {
   // IMPORTANT: Not a functional login, its just for illustrative purposes
-  userLoggedIn.publish(credentials.username);
-  return {
-    accessToken: 'example_token',
-    refreshToken: 'example_refresh_token',
-    expiresIn: 1565990270
-  };
+  userLoggedIn.publish(user.email);
+
+  return createToken(user);
 };
 
 module.exports = {
