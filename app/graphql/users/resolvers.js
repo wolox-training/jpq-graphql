@@ -21,7 +21,7 @@ module.exports = {
     users: getUsers
   },
   Mutation: {
-    createUser,
+    user: createUser,
     login: logIn
   },
   Subscription: {
@@ -30,6 +30,7 @@ module.exports = {
     }
   },
   User: {
-    email: root => root.email
+    email: root => root.email,
+    name: ({ firstName, lastName }) => `${firstName} ${lastName}`
   }
 };
