@@ -11,7 +11,7 @@ exports.createToken = user => {
     userId: user.id,
     email: user.email,
     iat: moment().unix(),
-    exp: expiresIn
+    exp: expiresIn.unix()
   };
 
   const token = jwt.encode(payload, secret);
