@@ -28,6 +28,7 @@ module.exports = {
     }
   },
   User: {
-    email: root => root.email
+    email: root => root.email,
+    name: ({ firstName, lastName }) => `${firstName} ${lastName}`
   }
 };
