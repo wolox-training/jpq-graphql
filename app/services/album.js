@@ -1,10 +1,11 @@
 const requestPromise = require('request-promise');
 const { endpointJsonPlaceholder } = require('../../config').common.externalApi;
 const { badRequest } = require('../errors');
+const { userAlbum } = require('../models');
 
-exports.getAlbum = ({ id }) => requestPromise(`${endpointJsonPlaceholder}/albums/${id}`, { json: true });
+const getAlbum = ({ id }) => requestPromise(`${endpointJsonPlaceholder}/albums/${id}`, { json: true });
 
-exports.getAlbums = async params => {
+const getAlbums = async params => {
   const { filter, offset, limit, orderBy } = params;
 
   try {
@@ -23,7 +24,23 @@ exports.getAlbums = async params => {
   }
 };
 
-exports.buyAlbum = params => {
+const buyAlbum = async params => {
   const { id } = params;
-  return { title: `Album with id: ${id}` };
+  const { userId } = params.user;
+
+  try {
+    const album = await getAlbum({ id });
+
+    userAlbum.createModel({ user_id: userId, album_id: id });
+
+    return { title: `${album.title}` };
+  } catch (error) {
+    throw badRequest(error.message);
+  }
+};
+
+module.exports = {
+  getAlbum,
+  getAlbums,
+  buyAlbum
 };

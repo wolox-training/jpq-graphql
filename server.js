@@ -16,6 +16,7 @@ migrationsManager
     }); */
     new ApolloServer({
       ...schema,
+      context: req => ({ ...req }),
       formatError: error => ({ message: error.message, statusCode: error.extensions.code })
     })
       .listen(port)

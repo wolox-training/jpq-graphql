@@ -6,8 +6,7 @@ const getAlbum = (_, params) => album.getAlbum(params);
 const getAlbums = (_, params) => album.getAlbums(params);
 const getPhotos = ({ id }) => getPhotosOfAlbum(id);
 const getArtist = ({ userId }) => getArtistByAlbum(userId);
-// eslint-disable-next-line no-unused-vars
-const buyAlbum = (obj, params, context) => album.buyAlbum(params);
+const buyAlbum = (_, params) => album.buyAlbum(params);
 
 module.exports = {
   Query: {

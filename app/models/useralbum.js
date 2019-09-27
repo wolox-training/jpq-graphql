@@ -1,4 +1,8 @@
 'use strict';
+
+const { databaseError } = require('../errors');
+const logger = require('../logger');
+
 module.exports = (sequelize, DataTypes) => {
   const UserAlbum = sequelize.define(
     'userAlbum',
@@ -29,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         user_album_unique: {
           name: 'Unique value per user and album',
           singleField: false,
-          fields: ['userId', 'albumId']
+          fields: ['user_id', 'album_id']
         }
       }
     }
@@ -39,7 +43,15 @@ module.exports = (sequelize, DataTypes) => {
     UserAlbum.belongsTo(models.user, { foreignKey: 'user_id', as: 'user' });
   };
 
-  UserAlbum.createModel = userAlbum => UserAlbum.create(userAlbum);
+  UserAlbum.createModel = userAlbum =>
+    UserAlbum.create(userAlbum)
+      .then(newUserAlbum => newUserAlbum)
+      .catch(error => {
+        logger.error(error.message);
+        throw databaseError(error.message);
+      });
+
+  UserAlbum.getOne = userAlbum => UserAlbum.findOne({ where: userAlbum });
 
   return UserAlbum;
 };

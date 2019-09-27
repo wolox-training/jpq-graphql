@@ -54,7 +54,7 @@ const signIn = async (resolve, root, args) => {
     throw badRequest('The password is incorrect');
   }
 
-  args.user = credentials;
+  args.user = userFound;
 
   return resolve(root, args);
 };
