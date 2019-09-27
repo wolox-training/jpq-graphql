@@ -32,31 +32,13 @@ module.exports = (sequelize, DataTypes) => {
     User.create(user)
       .then(result => {
         logger.info(`The user ${user.firstName} ${user.lastName} was successfully created`);
-        return {
-          ...result.dataValues,
-          name: `${user.firstName} ${user.lastName}`
-        };
+        return result.dataValues;
       })
       .catch(error => logger.error(error.message));
 
-  User.getOne = user =>
-    User.findOne({ where: user }).then(userResult => {
-      if (!userResult) {
-        return null;
-      }
-      return {
-        ...userResult.dataValues,
-        name: `${userResult.dataValues.firstName} ${userResult.dataValues.lastName}`
-      };
-    });
+  User.getOne = user => User.findOne({ where: user });
 
-  User.getAll = () =>
-    User.findAll().then(user =>
-      user.map(item => ({
-        ...item.dataValues,
-        name: `${item.dataValues.firstName} ${item.dataValues.lastName}`
-      }))
-    );
+  User.getAll = () => User.findAll();
 
   User.getByUsername = username => User.getOne({ username });
 
